@@ -11,6 +11,7 @@ $telefono = $_POST['telefono'];
 
 $sql= "INSERT INTO HR.CLIENTES (ID_CLIENTE, NOMBRE_CLIENTE, CORREO_CLIENTE, TELEFONO_CLIENTE) 
        VALUES (HR.CLIENTES_SEQ.NEXTVAL, :nombre, :correo, :telefono)";
+       
 $stmt = oci_parse($conn, $sql);
 
 

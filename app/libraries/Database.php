@@ -1,5 +1,5 @@
 <?php
-$host = "192.168.100.42";
+$host = "192.168.100.42"; //Cambiar segun sus IPs
 $port = "1521";
 $service_name = "orcl"; 
 $username = "HR";
