@@ -1,0 +1,779 @@
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #001a37;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 10px 0;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #001a37;
+    border-radius: 5px;
+}
+
+.menu-item {
+    margin: 0 15px;
+}
+
+.menu-item a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 19px; /* Tamaño de letra */
+    font-weight: bold; /* Negrita */
+    
+}
+
+.menu-item a:hover {
+    background-color: #0056b3;
+    color: #f4f4f4;
+}
+
+main {
+    padding: 20px;
+    background: transparent; /* Elimina el fondo blanco */
+    max-width: 100%; /* Haz que ocupe todo el ancho */
+    margin: 0; /* Elimina los márgenes */
+    border-radius: 0; /* Elimina los bordes redondeados */
+    box-shadow: none; /* Elimina la sombra */
+}
+
+h2 {
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+section {
+    padding: 10px;
+}
+
+
+section img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #007BFF;
+    color: white;
+}
+
+
+footer {
+    
+    justify-content: space-between; /* Espacia los elementos */
+    align-items: flex-start; /* Alinea los elementos al inicio vertical */
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    position: relative;
+    bottom: 0;
+    
+}
+
+footer aside {
+   
+    margin-bottom: 20px; /* Espacio a la derecha del aside */
+}
+
+footer .footer-info {
+    
+    text-align: center; /* Alineación del texto */
+}
+footer a {
+    color: #00BFFF;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+.form-container {
+    background-color: #ffffff;
+    padding: 25px 35px;
+}
+
+form h2 {
+    margin-bottom: 20px;
+    color: #444;
+    font-size: 22px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    width: 100%;
+    margin: 12px;
+    padding: 12px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+.error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    display: none;
+    margin-top: 5px;
+}
+
+input.error, textarea.error {
+    border-color: #e74c3c;
+}
+
+
+.servs {
+    display: flex;
+    justify-content: space-between; /* Separación uniforme entre servicios */
+    gap: 20px; /* Espaciado entre las cajas */
+    margin: 20px 0;
+}
+
+/* Estilo para cada servicio individual */
+.servicio {
+    background-color: #f9f9f9; /* Fondo diferente al background de la página */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    text-align: center; /* Centrar contenido */
+    flex: 1; /* Tamaño uniforme para todas las cajas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Imagen dentro de las cajas */
+.servicio img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+/* Botón estilizado */
+.servicio button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    width: 150px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.servicio button:hover {
+    background-color: #0056b3;
+}
+
+.funcionamiento{
+    
+    background-color: #f9f9f9; /* Fondo diferente al background de la página */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    text-align: center; /* Centrar contenido */
+    flex: 1; /* Tamaño uniforme para todas las cajas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+
+}
+
+.lista{
+    list-style-type: none;
+}
+
+.servic{
+    background-color: #f9f9f9; /* Fondo diferente al background de la página */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    text-align: center; /* Centrar contenido */
+    flex: 1; /* Tamaño uniforme para todas las cajas */
+}
+
+.banner {
+    text-align: center;
+    
+    background-color:#0d6da8;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.banner iframe {
+    margin-top: 20px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.funcionamiento {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.funcionamiento h2 {
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+.pasos {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se acomoden en varias filas si el espacio es pequeño */
+    justify-content: center;
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.paso {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paso:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.icono img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.paso h3 {
+    color: #007BFF;
+    margin: 10px 0;
+}
+
+.paso p {
+    font-size: 14px;
+    color: #555;
+}
+
+.log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegura que el contenido ocupe toda la altura disponible */
+}
+.loginform {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
+
+.loginform label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.loginform input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.loginform button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.loginform button:hover {
+    background-color: #0056b3;
+}
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro semitransparente */
+}
+
+/* Contenido del modal */
+.modal-contenido {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Botón cerrar */
+.cerrar {
+    color: #5d0000;
+    float: left;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cerrar:hover,
+.cerrar:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilo para el formulario */
+.modal-contenido form input,
+.modal-contenido form select {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-contenido form button {
+    padding: 10px 20px;
+    background-color: #1d4875;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-contenido form button:hover {
+    background-color: #0056b3;
+}
+.btn-editar {
+    background-color: #c54007; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    width: 50%;
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño del texto */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s ease; /* Suavidad al cambiar el color */
+}
+
+/* Cambiar color al pasar el cursor */
+.btn-editar:hover {
+    background-color: #411100; /* Azul más oscuro al hacer hover */
+}
+
+/* Estilo para el contenedor principal */
+.dmed {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo gris claro */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    font-family: Arial, sans-serif;
+}
+
+/* Título principal */
+.hmed {
+    text-align: center;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Estilo para la tabla */
+.tmed {
+    width: 100%;
+    border-collapse: collapse; /* Elimina espacios entre bordes */
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para aplicar border-radius en las tablas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo para las celdas de encabezado */
+.tmed th {
+    background-color: #007BFF; /* Azul principal */
+    color: white; /* Texto blanco */
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #0056b3; /* Borde inferior más oscuro */
+}
+
+/* Estilo para las celdas de datos */
+.tmed td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd; /* Borde inferior suave */
+    color: #333;
+    text-align: left;
+}
+
+/* Alternar colores en filas */
+.tmed tr:nth-child(even) {
+    background-color: #f2f2f2; /* Gris claro en filas pares */
+}
+
+/* Estilo para enlaces */
+.dmed a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #28a745; /* Verde */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dmed a:hover {
+    background-color: #218838; /* Verde más oscuro al pasar el mouse */
+}
+/* Estilo del contenedor principal */
+.tuser {
+    
+     /* Centra horizontalmente */
+   
+    width: 90%;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo gris claro */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    font-family: Arial, sans-serif;
+}
+
+/* Título principal */
+.huser {
+    
+    text-align: center;
+    color: #007BFF; /* Azul */
+    margin-bottom: 20px;
+    
+}
+.h1user {
+    
+    text-align: center;
+    color: #011e3c; /* Azul */
+    margin-bottom: 20px;
+    
+}
+
+.center-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 40%;
+    width: 100%;
+    margin: 0; /* Elimina márgenes */
+    background-color: #f9f9f9; /* Color de fondo */
+}
+
+/* Estilo de la tabla */
+.tuser table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina los espacios entre bordes */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para aplicar border-radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Encabezado de la tabla */
+.tuser th {
+    background-color: #007BFF; /* Azul */
+    color: white; /* Texto blanco */
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Celdas de la tabla */
+.tuser td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Borde inferior */
+    text-align: center;
+    color: #333;
+}
+
+/* Filas alternadas */
+.tuser tr:nth-child(even) {
+    background-color: #f2f2f2; /* Gris claro */
+}
+
+.tuser .bt-pagar {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tuser .bt-pagar:hover {
+    background-color: #218838; /* Verde oscuro */
+}
+
+/* Botón Volver */
+.tuser .btn-volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007BFF; /* Azul */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.tuser .btn-volver:hover {
+    background-color: #0056b3; /* Azul oscuro */
+}
+/* Botones */
+.tuser button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    width: 50%;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tuser button:hover {
+    background-color: #0056b3;
+}
+
+/* Botón eliminar */
+.tuser .btn-eliminar {
+    background-color: #e74c3c; /* Rojo */
+}
+
+.tuser .btn-eliminar:hover {
+    background-color: #c0392b; /* Rojo más oscuro */
+}
+
+.breg{
+    align-items: center;
+    color: white;
+    border: none;
+    width: 50%;
+    
+}
+
+.form-agregar {
+    margin: 20px 0;
+    width: 70%;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.form-agregar input {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-agregar button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-agregar button:hover {
+    background-color: #0056b3;
+}
+
+.bt-pagar {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    width: 50%;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pagar:hover {
+    background-color: #218838; /* Verde oscuro */
+}
+
+/* Botón Volver */
+.btn-volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007BFF; /* Azul */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-volver:hover {
+    background-color: #0056b3; /* Azul oscuro */
+}
+
+/* Botón Factura */
+.tuser .bt-factura {
+    background-color: #ffc107; /* Amarillo */
+    color: #333;
+    border: none;
+    width: 70%;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tuser .bt-factura:hover {
+    background-color: #e0a800; /* Amarillo oscuro */
+}
+
+/* Contenedor de factura */
+.tuser .factura {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 500px;
+    text-align: left;
+}
+
+.tuser .factura p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.tuser .btn-volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.tuser .btn-volver:hover {
+    background-color: #0056b3;
+}
