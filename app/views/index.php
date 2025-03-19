@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php
-include("inc/head.php")
-?>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
+    
+<div id="Clientes">
+    <table border="1">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Direccion</th>
+            <th>Tipo</th>
+            <th>Fecha de Registro</th>
+            <th>Nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
 
-    <header>
-        <a href="AgregarCliente.php">Agregar Cliente</a>
-    </header>
+    <?php
+    $conn = $conn = include_once __DIR__ . '/../libraries/Database.php';
+    
+    $query = "SELECT NOMBRE, TELEFONO, CORREO_ELECTRONICO, DIRECCION, TIPO_CLIENTE, FECHA_REGISTRO_CLIENTE, FECHA_NACIMIENTO FROM CLIENTES";
+    $statement = oci_parse($conn, $query);
 
-    <div id="Users">
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Salario</th>
-                </tr>
-            </thead>
-            <tbody>
-
-
-
-                <?
-                $conn = include_once __DIR__ . '/../libraries/Database.php';
-
-                $query = "SELECT FIRST_NAME, LAST_NAME, SALARY FROM HR.EMPLOYEES";
-                $statement = oci_parse($conn, $query);
-
-                if (!oci_execute($statement)) {
-                    $e = oci_error($statement);
-                    die("Error al ejecutar la consulta: " . $e['message']);
-                }
+    if (!oci_execute($statement)) { 
+        $e = oci_error($statement);
+        die("Error al ejecutar la consulta: " . $e['message']);
+    }
 
 
-                $row_count = 0;
-                while ($row = oci_fetch_array($statement, OCI_ASSOC + OCI_RETURN_NULLS)) {
-                    $row_count++;
-                    echo "<tr>
-                       <td>{$row['FIRST_NAME']}</td>
-                        <td>{$row['LAST_NAME']}</td>
-                        <td>{$row['SALARY']}</td>
+            $row_count = 0; 
+            while ($row = oci_fetch_array($statement, OCI_ASSOC+OCI_RETURN_NULLS)) {
+                $row_count++;
+                echo "<tr>
+                        <td>{$row['NOMBRE']}</td>
+                        <td>{$row['TELEFONO']}</td>
+                        <td>{$row['CORREO_ELECTRONICO']}</td>
+                        <td>{$row['DIRECCION']}</td>
+                        <td>{$row['TIPO_CLIENTE']}</td>
+                        <td>{$row['FECHA_REGISTRO_CLIENTE']}</td>
+                        <td>{$row['FECHA_NACIMIENTO']}</td>
                       </tr>";
-                }
+            }
 
+            
+            if ($row_count === 0) {
+                echo "<tr><td colspan='3'>No hay usuarios registrados</td></tr>";
+            }
 
-                if ($row_count === 0) {
-                    echo "<tr><td colspan='3'>No hay usuarios registrados</td></tr>";
-                }
+    oci_free_statement($statement); 
+    oci_close($conn); 
+    ?>
 
-                oci_free_statement($statement);
-                oci_close($conn);
-                ?>
+    </tbody>
 
-            </tbody>
-
-        </table>
+</table>
 
     </div>
 
 </body>
-
 </html>
