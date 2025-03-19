@@ -2,8 +2,8 @@
 $host = "192.168.100.42"; //Cambiar segun sus IPs
 $port = "1521";
 $service_name = "orcl"; 
-$username = "HR";
-$password = "12345";
+$username = "proyectofinal";
+$password = "123456";
 
 $connection_string = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=$host)(PORT=$port))(CONNECT_DATA=(SERVICE_NAME=$service_name)))";
 
