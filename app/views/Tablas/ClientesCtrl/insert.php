@@ -1,5 +1,5 @@
 <?php
-$conn = include_once __DIR__ . '/../../libraries/Database.php';
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
 //Aca guardamos lo que metimos en el form en variables de php
 
@@ -13,8 +13,8 @@ $nacimiento = $_POST['nacimiento'];
 
 //Aqui hacemos la sentencia sql para mandar los datos a las BD
 
-$sql= "INSERT INTO HR.CLIENTES (ID_CLIENTE, NOMBRE, TELEFONO, CORREO_ELECTRONICO, TIPO_CLIENTE, FECHA_NACIMIENTO) 
-       VALUES (HR.CLIENTES_SEQ.NEXTVAL, :nombre, :telefono, :correo, :direccion, :tipo, :nacimiento)";
+$sql= "INSERT INTO CLIENTES (NOMBRE, TELEFONO, CORREO_ELECTRONICO, DIRECCION, TIPO_CLIENTE, FECHA_NACIMIENTO) 
+VALUES (:nombre, :telefono, :correo, :direccion, :tipo, TO_DATE(:nacimiento, 'YYYY-MM-DD'))";
        
 $stmt = oci_parse($conn, $sql);
 
@@ -28,7 +28,9 @@ oci_bind_by_name($stmt, ':tipo', $tipo);
 oci_bind_by_name($stmt, ':nacimiento', $nacimiento);
 
 if (oci_execute($stmt)) {
+    oci_commit($conn);
     echo "Registro agregado correctamente.";
+    header("Location: /../Tablas/clientes.php?success=1");
 } else {
     $e = oci_error($stmt);
     echo "Error al insertar: " . $e['message'];
