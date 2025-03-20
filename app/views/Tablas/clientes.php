@@ -7,6 +7,10 @@
 </head>
 <body>
     
+
+
+
+
 <div id="Clientes">
     <table border="1">
     <thead>
@@ -45,6 +49,12 @@
                         <td>{$row['TIPO_CLIENTE']}</td>
                         <td>{$row['FECHA_REGISTRO_CLIENTE']}</td>
                         <td>{$row['FECHA_NACIMIENTO']}</td>
+                        <td>
+                            <button class=\"btn-editar\"><i class=\"fas fa-edit\"></i>  Editar</button>
+                        </td>
+                        <td>
+                            <button class=\"btn-eliminar\"><i class=\"fas fa-edit\"></i>  Eliminar</button>
+                        </td>
                       </tr>";
             }
 
@@ -62,6 +72,8 @@
 </table>
 
     </div>
+
+    <button>Agregar</button>
 
 </body>
 </html>
