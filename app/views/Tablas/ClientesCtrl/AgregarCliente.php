@@ -26,8 +26,8 @@
 
             <label for="tipo">Tipo de Cliente:</label>
             <select name="tipo" id="tipo" required>
-                <option value="NUEVO">Nuevo</option>
-                <option value="RECURRENTE">Recurrente</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="recurrente">Recurrente</option>
                 <option value="VIP">VIP</option>
             </select><br><br>
 

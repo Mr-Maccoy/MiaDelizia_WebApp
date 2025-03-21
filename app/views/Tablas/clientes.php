@@ -54,7 +54,10 @@
                         <td>{$row['FECHA_REGISTRO_CLIENTE']}</td>
                         <td>{$row['FECHA_NACIMIENTO']}</td>
                         <td>
-                            <button class=\"btn-editar\"><i class=\"fas fa-edit\"></i>  Editar</button>
+                            <form method=\"post\" action=\"/Tablas/ClientesCtrl/EditarCliente.php\" onsubmit=\"return confirm('¿Estás seguro de editar este usuario?');\">
+                                    <input type=\"hidden\" name=\"id_cliente\" value=\"{$row['ID_CLIENTE']}\">
+                                    <button type=\"submit\" class=\"btn-editar\">Editar</button>
+                                </form>
                         </td>
                         <td>
                             

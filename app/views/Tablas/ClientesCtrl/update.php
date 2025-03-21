@@ -1,8 +1,8 @@
 <?php
-$conn = include_once __DIR__ . '/../../libraries/Database.php';
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
 // Variables recibidas del formulario
-$id_cliente = $_POST['id_cliente']; // ID del cliente que se va a actualizar
+$id_cliente = (int)$_POST['id_cliente']; // ID del cliente que se va a actualizar
 $nombre = $_POST['nombre'];
 $telefono = $_POST['telefono'];
 $correo = $_POST['correo'];
@@ -11,13 +11,13 @@ $tipo = $_POST['tipo'];
 $nacimiento = $_POST['nacimiento'];
 
 // Sentencia SQL para actualizar
-$sql = "UPDATE HR.CLIENTES 
+$sql = "UPDATE CLIENTES 
         SET NOMBRE = :nombre, 
             TELEFONO = :telefono, 
             CORREO_ELECTRONICO = :correo, 
             DIRECCION = :direccion, 
             TIPO_CLIENTE = :tipo, 
-            FECHA_NACIMIENTO = :nacimiento 
+            FECHA_NACIMIENTO = TO_DATE(:nacimiento, 'YYYY-MM-DD')
         WHERE ID_CLIENTE = :id_cliente";
 
 $stmt = oci_parse($conn, $sql);
@@ -33,7 +33,9 @@ oci_bind_by_name($stmt, ':nacimiento', $nacimiento);
 
 // Ejecutar la consulta
 if (oci_execute($stmt)) {
+    oci_commit($conn);
     echo "Registro actualizado correctamente.";
+    header("Location: /../Tablas/clientes.php?success=1");
 } else {
     $e = oci_error($stmt);
     echo "Error al actualizar: " . $e['message'];
