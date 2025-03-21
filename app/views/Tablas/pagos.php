@@ -15,7 +15,10 @@ include("head.php")
 
 
     <div class="jumbotron jumbotron-flud text-center">
-
+    <div class="container">
+    <h1 class="display-3">Comming Soon</h1>
+    <p class="lead">Estamos en proceso de contrucción</p>
+    </div>
 
     <div id="Clientes">
         <table border="1">
