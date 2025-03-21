@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+
+<?php
+include("inc/head.php")
+?>
+
 <body>
-<a href="Tablas/clientes.php">Tabla Cliente</a>
-<a href="Tablas/pedidos.php">Tabla Pedidos</a>
-<a href="Tablas/eventos.php">Tabla Eventos</a>
-<a href="Tablas/inventario.php">Tabla Inventario</a>
-<a href="Tablas/productos.php">Tabla Productos</a>
-<a href="Tablas/categorias.php">Tabla Categorias</a>
+    <header>
+        <?php include("menu.php") ?>
+    </header>
+    
+    <div class="jumbotron jumbotron-flud text-center">
+    <div class="container">
+    <h1 class="display-3">Bienvenidos a Mia Delizia</h1>
+    <p class="lead">Estamos en proceso de contrucción</p>
+    </div>
+</div>
 
-<a href="Tablas/facturas.php">Tabla Facturas</a>
-<a href="Tablas/roles.php">Tabla Roles</a>
-<a href="Tablas/usuarios.php">Tabla Usuarios</a>
-
-
+<footer>
+<?php include("inc/footer.php") ?>
+</footer>
+    
 </body>
+
 </html>
