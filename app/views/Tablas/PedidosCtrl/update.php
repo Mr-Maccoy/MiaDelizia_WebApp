@@ -3,28 +3,28 @@
 $conn = include_once __DIR__ . '/../../libraries/Database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recibir los datos del formulario
+    
     $id_pedido = $_POST['id_pedido'];
     $id_cliente = $_POST['id_cliente'];
     $fecha_pedido = $_POST['fecha_pedido'];
     $total = $_POST['total'];
     $estado = $_POST['estado'];
 
-    // Consulta para actualizar el pedido
+    
     $query = "UPDATE PEDIDOS 
               SET ID_CLIENTE = :id_cliente, FECHA_PEDIDO = :fecha_pedido, TOTAL = :total, ESTADO = :estado 
               WHERE ID_PEDIDO = :id_pedido";
 
     $stmt = oci_parse($conn, $query);
 
-    // Vincular los valores
+    
     oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
     oci_bind_by_name($stmt, ':id_cliente', $id_cliente);
     oci_bind_by_name($stmt, ':fecha_pedido', $fecha_pedido);
     oci_bind_by_name($stmt, ':total', $total);
     oci_bind_by_name($stmt, ':estado', $estado);
 
-    // Ejecutar la consulta
+    
     if (oci_execute($stmt)) {
         echo "Pedido actualizado correctamente.";
     } else {
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error al actualizar el pedido: " . $e['message'];
     }
 
-    // Liberar los recursos y cerrar la conexión
+    
     oci_free_statement($stmt);
     oci_close($conn);
 }

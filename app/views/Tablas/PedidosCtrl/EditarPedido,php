@@ -1,0 +1,50 @@
+<?php
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
+$id_pedido = (int)$_POST['id_pedido']; // Se obtiene el ID del pedido a editar
+
+$query = "SELECT * FROM PEDIDOS WHERE ID_PEDIDO = :id_pedido";
+$stmt = oci_parse($conn, $query);
+oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
+oci_execute($stmt);
+$row = oci_fetch_assoc($stmt);
+oci_free_statement($stmt);
+oci_close($conn);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pedido</title>
+</head>
+
+<body>
+    <div class="Edit">
+        <h2>Editar Pedido</h2>
+        <form action="update_pedido.php" method="post">
+            <input type="hidden" name="id_pedido" value="<?= $id_pedido ?>">
+
+            <label>Cliente ID:</label>
+            <input type="text" name="id_cliente" value="<?= $row['ID_CLIENTE'] ?>" required><br><br>
+
+            <label>Fecha del Pedido:</label>
+            <input type="date" name="fecha_pedido" value="<?= date('Y-m-d', strtotime($row['FECHA_PEDIDO'])) ?>" required><br><br>
+
+            <label>Total:</label>
+            <input type="text" name="total" value="<?= $row['TOTAL'] ?>" required><br><br>
+
+            <label>Estado:</label>
+            <select name="estado" id="estado" required>
+                <option value="Pendiente" <?= $row['ESTADO'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                <option value="Enviado" <?= $row['ESTADO'] == 'Enviado' ? 'selected' : '' ?>>Enviado</option>
+                <option value="Entregado" <?= $row['ESTADO'] == 'Entregado' ? 'selected' : '' ?>>Entregado</option>
+            </select><br><br>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </div>
+</body>
+
+</html>
