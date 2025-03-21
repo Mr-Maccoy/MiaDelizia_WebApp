@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -22,11 +22,8 @@
         <tbody>
 
         <?php
-        // Se incluye y asigna la conexión
-        require_once __DIR__ . '/../../libraries/Database.php';
-        $conn = Database::connect();
+        $conn = include_once __DIR__ . '/../../libraries/Database.php';
 
-        // Consulta corregida con los nombres de columnas correctos
         $query = "SELECT I.ID_INVENTARIO, P.NOMBRE AS NOMBRE_PRODUCTO, 
                          I.CANTIDAD_DISPONIBLE, I.FECHA_ACTUALIZACION
                   FROM INVENTARIO I
