@@ -32,20 +32,13 @@ include("head.php")
 
                     <?php
                     $conn = $conn = include_once __DIR__ . '/../../libraries/Database.php';
-<<<<<<< Updated upstream
 
 
-                    
-                $query = "SELECT ID_FACTURA, ID_PEDIDO, FECHA_FACTURA, TOTAL, ESTADO_FACTURA FROM FACTURA";
-                $statement = oci_parse($conn, $query);
 
-=
-=======
-
-                    $query = "SELECT ID_FACTURA, ID_PEDIDO, FECHA_FACTURA, TOTAL, ESTADO_FACTURA, FACTURA_PEDIDO FROM FACTURA";
+                    $query = "SELECT ID_FACTURA, ID_PEDIDO, FECHA_FACTURA, TOTAL, ESTADO_FACTURA FROM FACTURA";
                     $statement = oci_parse($conn, $query);
 
->>>>>>> Stashed changes
+
                     if (!oci_execute($statement)) {
                         $e = oci_error($statement);
                         die("Error al ejecutar la consulta: " . $e['message']);
@@ -88,15 +81,15 @@ include("head.php")
 
             </table>
 
-        
 
-        <a href="/Tablas/FacturasCtrl/AgregarFactura.php">
-            <button>Agregar Factura</button>
-        </a>
+
+            <a href="/Tablas/FacturasCtrl/AgregarFactura.php">
+                <button>Agregar Factura</button>
+            </a>
 
         </div>
     </div>
-    
+
 
     <footer>
         <?php include("footer.php") ?>
