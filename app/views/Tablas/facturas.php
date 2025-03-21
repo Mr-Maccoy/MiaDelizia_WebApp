@@ -1,48 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php
+include("head.php")
+?>
 
 <body>
 
 
 
+    <header>
+        <?php include("menu.php") ?>
+    </header>
 
 
-    <div id="Facturas">
-        <table border="1">
-            <thead>
-                <tr>
+    <div class="jumbotron jumbotron-flud text-center">
 
-                    <th>Pedido</th>
-                    <th>Fecha factura</th>
-                    <th>Total</th>
-                    <th>Estado factura</th>
-                    <th>Factura del pedido</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div id="Facturas">
+            <table border="1">
+                <thead>
+                    <tr>
 
-                <?php
-                $conn = $conn = include_once __DIR__ . '/../../libraries/Database.php';
+                        <th>Pedido</th>
+                        <th>Fecha factura</th>
+                        <th>Total</th>
+                        <th>Estado factura</th>
+                        <th>Factura del pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                    <?php
+                    $conn = $conn = include_once __DIR__ . '/../../libraries/Database.php';
+<<<<<<< Updated upstream
+
+                    
                 $query = "SELECT ID_FACTURA, ID_PEDIDO, FECHA_FACTURA, TOTAL, ESTADO_FACTURA FROM FACTURA";
                 $statement = oci_parse($conn, $query);
 
-                if (!oci_execute($statement)) {
-                    $e = oci_error($statement);
-                    die("Error al ejecutar la consulta: " . $e['message']);
-                }
+=======
+
+                    $query = "SELECT ID_FACTURA, ID_PEDIDO, FECHA_FACTURA, TOTAL, ESTADO_FACTURA, FACTURA_PEDIDO FROM FACTURA";
+                    $statement = oci_parse($conn, $query);
+
+>>>>>>> Stashed changes
+                    if (!oci_execute($statement)) {
+                        $e = oci_error($statement);
+                        die("Error al ejecutar la consulta: " . $e['message']);
+                    }
 
 
-                $row_count = 0;
-                while ($row = oci_fetch_array($statement, OCI_ASSOC + OCI_RETURN_NULLS)) {
-                    $row_count++;
-                    echo "<tr>
+                    $row_count = 0;
+                    while ($row = oci_fetch_array($statement, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                        $row_count++;
+                        echo "<tr>
                         
                         <td>{$row['PEDIDO']}</td>
                         <td>{$row['FECHA_FACTURA']}</td>
@@ -60,29 +71,34 @@
                         </td>
 
                       </tr>";
-                }
+                    }
 
 
-                if ($row_count === 0) {
-                    echo "<tr><td colspan='3'>No hay facturas registradas</td></tr>";
-                }
+                    if ($row_count === 0) {
+                        echo "<tr><td colspan='3'>No hay facturas registradas</td></tr>";
+                    }
 
-                oci_free_statement($statement);
-                oci_close($conn);
-                ?>
+                    oci_free_statement($statement);
+                    oci_close($conn);
+                    ?>
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
 
+        
+
+        <a href="/Tablas/FacturasCtrl/AgregarFactura.php">
+            <button>Agregar Factura</button>
+        </a>
+
+        </div>
     </div>
+    
 
-    <a href="/Tablas/FacturasCtrl/AgregarFactura.php">
-        <button>Agregar Factura</button>
-    </a>
-
-
-
+    <footer>
+        <?php include("footer.php") ?>
+    </footer>
 
 </body>
 

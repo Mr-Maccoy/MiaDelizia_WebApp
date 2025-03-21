@@ -86,11 +86,11 @@ include("head.php")
         </table>
 
     </div>
-    </div>
 
     <a href="/Tablas/ClientesCtrl/AgregarCliente.php">
         <button>Agregar Cliente</button>
     </a>
+    </div>
 
 
     <footer>

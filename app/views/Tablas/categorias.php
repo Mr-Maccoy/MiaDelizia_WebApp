@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php
+include("head.php")
+?>
 
 <body>
 
 
 
-
-
+<header>
+        <?php include("menu.php") ?>
+    </header>
+    <div class="jumbotron jumbotron-flud text-center">
     <div id="Categorias">
         <table border="1">
             <thead>
@@ -41,8 +41,8 @@
                     $row_count++;
                     echo "<tr>
                         
-                        <td>{$row['NOMBRE']}</td>
-                        <td>{$row['DESCRIPCION']}</td>
+                        <td>{$row['NOMBRE_CATEGORIA']}</td>
+                        <td>{$row['DESCRIPCION_CATEGORIA']}</td>
                         <td>
                             <button class=\"btn-editar\"><i class=\"fas fa-edit\"></i>  Editar</button>
                         </td>
@@ -76,8 +76,10 @@
         <button>Agregar Categoria</button>
     </a>
 
-
-
+            </div>
+    <footer>
+<?php include("footer.php") ?>
+</footer>
 
 </body>
 
