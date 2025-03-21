@@ -15,16 +15,20 @@
             <tr>
                 <th>Código Inventario</th>
                 <th>Nombre del Producto</th>
-                <th>Cantidad</th>
-                <th>Fecha de Ingreso</th>
+                <th>Cantidad Disponible</th>
+                <th>Fecha de Actualización</th>
             </tr>
         </thead>
         <tbody>
 
         <?php
-        $conn = include_once __DIR__ . '/../../libraries/Database.php';
+        // Se incluye y asigna la conexión
+        require_once __DIR__ . '/../../libraries/Database.php';
+        $conn = Database::connect();
 
-        $query = "SELECT I.ID_INVENTARIO, P.NOMBRE AS NOMBRE_PRODUCTO, I.CANTIDAD, I.FECHA_INGRESO
+        // Consulta corregida con los nombres de columnas correctos
+        $query = "SELECT I.ID_INVENTARIO, P.NOMBRE AS NOMBRE_PRODUCTO, 
+                         I.CANTIDAD_DISPONIBLE, I.FECHA_ACTUALIZACION
                   FROM INVENTARIO I
                   LEFT JOIN PRODUCTOS P ON I.ID_PRODUCTO = P.ID_PRODUCTO";
 
@@ -41,8 +45,8 @@
             echo "<tr>
                     <td>{$row['ID_INVENTARIO']}</td>
                     <td>{$row['NOMBRE_PRODUCTO']}</td>
-                    <td>{$row['CANTIDAD']}</td>
-                    <td>{$row['FECHA_INGRESO']}</td>
+                    <td>{$row['CANTIDAD_DISPONIBLE']}</td>
+                    <td>{$row['FECHA_ACTUALIZACION']}</td>
                   </tr>";
         }
 
