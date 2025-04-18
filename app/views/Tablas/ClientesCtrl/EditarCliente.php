@@ -2,12 +2,16 @@
 $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 $id_cliente = (int)$_POST['id_cliente'];
 
-$query = "SELECT * FROM CLIENTES WHERE ID_CLIENTE = :id_cliente";
+$query = "BEGIN pkg_clientes.obtener_cliente_por_id(:id_cliente, :cursor); END;";
 $stmt = oci_parse($conn, $query);
+$cursor = oci_new_cursor($conn);
 oci_bind_by_name($stmt, ':id_cliente', $id_cliente);
+oci_bind_by_name($stmt, ':cursor', $cursor, -1, OCI_B_CURSOR);
 oci_execute($stmt);
-$row = oci_fetch_assoc($stmt);
+oci_execute($cursor);
+$row = oci_fetch_assoc($cursor);
 oci_free_statement($stmt);
+oci_free_statement($cursor);
 oci_close($conn);
 ?>
 

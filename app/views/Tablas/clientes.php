@@ -34,17 +34,22 @@ include("head.php")
                 <?php
                 $conn = $conn = include_once __DIR__ . '/../../libraries/Database.php';
 
-                $query = "SELECT ID_CLIENTE, NOMBRE, TELEFONO, CORREO_ELECTRONICO, DIRECCION, TIPO_CLIENTE, FECHA_REGISTRO_CLIENTE, FECHA_NACIMIENTO FROM CLIENTES";
+                $query = "BEGIN pkg_clientes.obtener_clientes(:cursor); END;";
                 $statement = oci_parse($conn, $query);
+                $cursor = oci_new_cursor($conn);
+                oci_bind_by_name($statement, ':cursor', $cursor, -1, OCI_B_CURSOR);
 
+                
                 if (!oci_execute($statement)) {
                     $e = oci_error($statement);
                     die("Error al ejecutar la consulta: " . $e['message']);
                 }
 
+                oci_execute($cursor);
+
 
                 $row_count = 0;
-                while ($row = oci_fetch_array($statement, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                while ($row = oci_fetch_array($cursor, OCI_ASSOC + OCI_RETURN_NULLS)) {
                     $row_count++;
                     echo "<tr>
                         
@@ -78,6 +83,7 @@ include("head.php")
                 }
 
                 oci_free_statement($statement);
+                oci_free_statement($cursor);
                 oci_close($conn);
                 ?>
 

@@ -13,7 +13,9 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
         $id = $_GET['id'];
-       OMBRE_CATEGORIA, DESCRIPCION_CATEGORIA FROM CATEGORIAS WHERE ID_CATEGORIA = :id";
+       $query= "UPDATE CATEGORIAS 
+                SET NOMBRE_CATEGORIA = :nombre, DESCRIPCION_CATEGORIA = :descripcion 
+                WHERE ID_CATEGORIA = :id";
         $statement = oci_parse($conn, $query);
         oci_bind_by_name($statement, ':id', $id);
 

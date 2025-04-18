@@ -25,7 +25,7 @@ include("head.php")
             <tbody>
 
                 <?php
-                $conn = $conn = include_once __DIR__ . '/../../libraries/Database.php';
+                $conn = include_once __DIR__ . '/../../libraries/Database.php';
 
                 $query = "SELECT ID_CATEGORIA,NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA  FROM CATEGORIAS";
                 $statement = oci_parse($conn, $query);

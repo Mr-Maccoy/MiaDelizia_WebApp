@@ -11,14 +11,7 @@ $tipo = $_POST['tipo'];
 $nacimiento = $_POST['nacimiento'];
 
 // Sentencia SQL para actualizar
-$sql = "UPDATE CLIENTES 
-        SET NOMBRE = :nombre, 
-            TELEFONO = :telefono, 
-            CORREO_ELECTRONICO = :correo, 
-            DIRECCION = :direccion, 
-            TIPO_CLIENTE = :tipo, 
-            FECHA_NACIMIENTO = TO_DATE(:nacimiento, 'YYYY-MM-DD')
-        WHERE ID_CLIENTE = :id_cliente";
+$sql = "BEGIN pkg_clientes.actualizar_cliente(:id_cliente, :nombre, :telefono, :correo, :direccion, :tipo, TO_DATE(:nacimiento, 'YYYY-MM-DD')); END;";
 
 $stmt = oci_parse($conn, $sql);
 

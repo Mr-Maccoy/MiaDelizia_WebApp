@@ -5,7 +5,7 @@ $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 $id_cliente = (int)$_POST['id_cliente'];
 echo "ID a eliminar: " . $id_cliente . "<br>";
 
-$sql = "DELETE FROM CLIENTES WHERE ID_CLIENTE = :id_cliente";
+$sql = "BEGIN pkg_clientes.eliminar_clientes(:id_cliente); END;";
 
 $stmt = oci_parse($conn, $sql);
 

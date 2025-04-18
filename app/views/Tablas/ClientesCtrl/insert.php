@@ -13,8 +13,7 @@ $nacimiento = $_POST['nacimiento'];
 
 //Aqui hacemos la sentencia sql para mandar los datos a las BD
 
-$sql= "INSERT INTO CLIENTES (NOMBRE, TELEFONO, CORREO_ELECTRONICO, DIRECCION, TIPO_CLIENTE, FECHA_NACIMIENTO) 
-VALUES (:nombre, :telefono, :correo, :direccion, :tipo, TO_DATE(:nacimiento, 'YYYY-MM-DD'))";
+$sql= "BEGIN pkg_clientes.insertar_cliente(:nombre, :telefono, :correo, :direccion, :tipo, TO_DATE(:nacimiento, 'YYYY-MM-DD')); END;";
        
 $stmt = oci_parse($conn, $sql);
 
