@@ -4,7 +4,7 @@
 <?php
 include("head.php")
 ?>
-
+ 
 <body>
 <header>
         <?php include("menu.php") ?>
