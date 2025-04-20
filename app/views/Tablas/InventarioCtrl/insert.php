@@ -6,10 +6,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_producto = $_POST['id_producto'];
     $cantidad_disponible = $_POST['cantidad'];
 
-    $query = "INSERT INTO INVENTARIO (ID_PRODUCTO, CANTIDAD_DISPONIBLE)
-              VALUES (:id_producto, :cantidad_disponible)";
-
-    $stmt = oci_parse($conn, $query);
+    $sql = "BEGIN pkg_inventario.insertar_inventario(:id_producto, :cantidad_disponible, SYSDATE); END;";
+    
+    $stmt = oci_parse($conn, $sql);
 
     oci_bind_by_name($stmt, ':id_producto', $id_producto);
     oci_bind_by_name($stmt, ':cantidad_disponible', $cantidad_disponible);

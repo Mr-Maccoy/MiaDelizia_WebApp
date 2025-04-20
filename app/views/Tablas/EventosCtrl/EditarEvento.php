@@ -2,12 +2,21 @@
 $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 $id_evento = (int)$_POST['id_evento'];
 
-$query = "SELECT * FROM EVENTOS WHERE ID_EVENTO = :id_evento";
-$stmt = oci_parse($conn, $query);
-oci_bind_by_name($stmt, ':id_evento', $id_evento);
-oci_execute($stmt);
-$row = oci_fetch_assoc($stmt);
-oci_free_statement($stmt);
+$query = "BEGIN pkg_eventos.obtener_evento_por_id(:id_evento, :cursor); END;";
+$statement = oci_parse($conn, $query);
+
+$cursor = oci_new_cursor($conn);
+
+oci_bind_by_name($statement, ':id_evento', $id_evento, -1, SQLT_INT);
+oci_bind_by_name($statement, ':cursor', $cursor, -1, OCI_B_CURSOR);
+
+oci_execute($statement);
+
+oci_execute($cursor);
+$row = oci_fetch_assoc($cursor);
+
+oci_free_statement($statement);
+oci_free_statement($cursor);
 oci_close($conn);
 ?>
 
