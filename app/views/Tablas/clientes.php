@@ -60,6 +60,7 @@ include("head.php")
                         <td>{$row['TIPO_CLIENTE']}</td>
                         <td>{$row['FECHA_REGISTRO_CLIENTE']}</td>
                         <td>{$row['FECHA_NACIMIENTO']}</td>
+                        
                         <td>
                             <form method=\"post\" action=\"/Tablas/ClientesCtrl/EditarCliente.php\" onsubmit=\"return confirm('¿Estás seguro de editar este usuario?');\">
                                     <input type=\"hidden\" name=\"id_cliente\" value=\"{$row['ID_CLIENTE']}\">

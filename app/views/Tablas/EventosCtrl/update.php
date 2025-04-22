@@ -30,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     oci_bind_by_name($stmt, ':descripcion', $descripcion);
 
     if (oci_execute($stmt)) {
-        echo "<script>alert('Evento actualizado correctamente'); window.location.href = 'listar_eventos.php';</script>";
+        echo "Registro actualizado correctamente.";
+    header("Location: /../Tablas/eventos.php?success=1");
     } else {
         $e = oci_error($stmt);
         echo "Error al actualizar: " . $e['message'];

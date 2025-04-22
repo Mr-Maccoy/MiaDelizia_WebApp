@@ -8,7 +8,7 @@ $fecha_factura = $_POST['fecha_factura'];
 $total = $_POST['total'];
 $estado_factura = $_POST['estado_factura'];
 
-$sql= "BEGIN pkg_facturas.insertar_factura(:id_pedido, :fecha_factura, :total, :estado_factura); END;";
+$sql= "BEGIN pkg_facturas.insertar_factura(:id_pedido, TO_DATE(:fecha_factura, 'YYYY-MM-DD'), :total, :estado_factura); END;";
        
 $stmt = oci_parse($conn, $sql);
 
