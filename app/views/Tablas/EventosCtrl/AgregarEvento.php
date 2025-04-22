@@ -10,7 +10,7 @@
 <body>
     <div class="Insert">
         <h2>Agregar Evento</h2>
-        <form action="insert_evento.php" method="post">
+        <form action="insert.php" method="post">
 
             <label for="nombre_evento">Nombre del Evento:</label>
             <input type="text" name="nombre_evento" id="nombre_evento" required><br><br>
