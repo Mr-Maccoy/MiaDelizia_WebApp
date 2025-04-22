@@ -14,7 +14,7 @@ $stmt = oci_parse($conn, $sql);
 
 
 
-oci_bind_by_name($stmt, ':pedido', $pedido);
+oci_bind_by_name($stmt, ':id_pedido', $pedido);
 oci_bind_by_name($stmt, ':fecha_factura', $fecha_factura);
 oci_bind_by_name($stmt, ':total', $total);
 oci_bind_by_name($stmt, ':estado_factura', $estado_factura);
