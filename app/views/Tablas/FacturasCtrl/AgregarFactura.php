@@ -8,8 +8,8 @@
 <body>
     <h1>Agregar Factura</h1>
     <form action="Insert.php" method="post">
-        <label for="pedido">Pedido:</label>
-        <input type="text" id="pedido" name="pedido" required>
+        <label for="id_pedido">Pedido:</label>
+        <input type="text" id="id_pedido" name="id_pedido" required>
         <br>
         <label for="fecha_factura">Fecha Factura:</label>
         <input type="date" id="fecha_factura" name="fecha_factura" required>
@@ -17,9 +17,12 @@
         <label for="total">Total:</label>
         <input type="number" id="total" name="total" required>
         <br>
-        <label for="estado_factura">Estado Factura:</label>
-        <input type="text" id="estado_factura" name="estado_factura" required>
-        <br>
+        <label for="estado_factura">Estado:</label>
+            <select name="estado_factura" id="estado_factura" required>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Enviado">Enviado</option>
+                <option value="Entregado">Entregado</option>
+            </select><br><br>
         <button type="submit">Agregar</button>
     </form>
 
