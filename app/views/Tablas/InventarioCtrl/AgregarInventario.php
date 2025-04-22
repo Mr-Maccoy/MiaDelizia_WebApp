@@ -10,7 +10,7 @@
 <body>
     <div class="Insert">
         <h2>Agregar Inventario</h2>
-        <form action="insert_inventario.php" method="post">
+        <form action="insert.php" method="post">
 
             <label for="id_producto">ID Producto:</label>
             <input type="text" name="id_producto" id="id_producto" required><br><br>
