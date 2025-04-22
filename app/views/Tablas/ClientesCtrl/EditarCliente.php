@@ -2,10 +2,10 @@
 $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 $id_cliente = (int)$_POST['id_cliente'];
 
-$query = "BEGIN pkg_facturas.obtener_factura_por_id(:id_pedido, :cursor); END;";
+$query = "BEGIN pkg_clientes.obtener_cliente_por_id(:id_cliente, :cursor); END;";
 $stmt = oci_parse($conn, $query);
 $cursor = oci_new_cursor($conn);
-oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
+oci_bind_by_name($stmt, ':id_cliente', $id_cliente);
 oci_bind_by_name($stmt, ':cursor', $cursor, -1, OCI_B_CURSOR);
 oci_execute($stmt);
 oci_execute($cursor);
@@ -26,9 +26,9 @@ oci_close($conn);
 
 <body>
     <div class="Edit">
-        <h2>Agregar Facturas</h2>
+        <h2>Agregar Cliente</h2>
         <form action="update.php" method="post">
-            <input type="hidden" name="id_pedido" value="<?= $id_pedido ?>">
+            <input type="hidden" name="id_cliente" value="<?= $id_cliente ?>">
 
             <label>Nombre:</label>
             <input type="text" name="nombre" value="<?= $row['NOMBRE'] ?>" required><br><br>

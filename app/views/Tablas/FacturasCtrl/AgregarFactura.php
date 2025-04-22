@@ -19,9 +19,9 @@
         <br>
         <label for="estado_factura">Estado:</label>
             <select name="estado_factura" id="estado_factura" required>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Enviado">Enviado</option>
-                <option value="Entregado">Entregado</option>
+                <option value="Pendiente">PENDIENTE</option>
+                <option value="Enviado">PAGADA</option>
+                <option value="Entregado">ANULADA</option>
             </select><br><br>
         <button type="submit">Agregar</button>
     </form>
