@@ -1,57 +1,42 @@
 <?php
 // Conexión a la base de datos
 $conn = include_once __DIR__ . '/../../libraries/Database.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
     
-    $id_pedido = $_POST['id_pedido'];
-    $id_cliente = $_POST['id_cliente'];
-    $fecha_pedido = $_POST['fecha_pedido'];
-    $total = $_POST['total'];
-    $estado = $_POST['estado'];
 
-    
-    $query = "UPDATE PEDIDOS 
-              SET ID_CLIENTE = :id_cliente, FECHA_PEDIDO = :fecha_pedido, TOTAL = :total, ESTADO = :estado 
-              WHERE ID_PEDIDO = :id_pedido";
+$id_pedido = (int)$_POST['id_pedido'];
+$id_cliente = (int)$_POST['id_cliente'];
+$fecha_pedido = $_POST['fecha_pedido'];
+$estado_pedido = $_POST['estado_pedido'];
+$fecha_entrega = $_POST['fecha_entrega'];
+$tipo_envio = $_POST['tipo_envio'];
+$monto_total = (float)$_POST['monto_total'];
 
-    $stmt = oci_parse($conn, $query);
 
-    
-    oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
-    oci_bind_by_name($stmt, ':id_cliente', $id_cliente);
-    oci_bind_by_name($stmt, ':fecha_pedido', $fecha_pedido);
-    oci_bind_by_name($stmt, ':total', $total);
-    oci_bind_by_name($stmt, ':estado', $estado);
+$sql = "BEGIN pkg_pedidos.actualizar_pedido(:id_pedido, :id_cliente, TO_DATE(:fecha_pedido, 'YYYY-MM-DD'), :estado_pedido, TO_DATE(:fecha_entrega, 'YYYY-MM-DD'), :tipo_envio, :monto_total); END;";
 
-    
-    if (oci_execute($stmt)) {
-        echo "Pedido actualizado correctamente.";
-    } else {
-        $e = oci_error($stmt);
-        echo "Error al actualizar el pedido: " . $e['message'];
-    }
+$stmt = oci_parse($conn, $sql);
 
-    
+oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
+oci_bind_by_name($stmt, ':id_cliente', $id_cliente);
+oci_bind_by_name($stmt, ':fecha_pedido', $fecha_pedido);
+oci_bind_by_name($stmt, ':estado_pedido', $estado_pedido);
+oci_bind_by_name($stmt, ':fecha_entrega', $fecha_entrega);
+oci_bind_by_name($stmt, ':tipo_envio', $tipo_envio);
+oci_bind_by_name($stmt, ':monto_total', $monto_total);
+
+
+if (oci_execute($stmt)) {
+    oci_commit($conn);
+    echo "Pedido actualizado correctamente.";
+    header("Location: /../Tablas/pedidos.php?success=1");
+} else {
+     $e = oci_error($stmt);
+     echo "Error al actualizar el pedido: " . $e['message'];
+    } 
+    // Cerrar la conexión
     oci_free_statement($stmt);
     oci_close($conn);
-}
-?>
-
-<form action="update_pedido.php" method="POST">
-    <label for="id_pedido">ID Pedido:</label>
-    <input type="text" name="id_pedido" required><br>
-    <label for="id_cliente">ID Cliente:</label>
-    <input type="text" name="id_cliente" required><br>
-    <label for="fecha_pedido">Fecha del Pedido:</label>
-    <input type="date" name="fecha_pedido" required><br>
-    <label for="total">Total:</label>
-    <input type="text" name="total" required><br>
-    <label for="estado">Estado:</label>
-    <select name="estado" required>
-        <option value="Pendiente">Pendiente</option>
-        <option value="Enviado">Enviado</option>
-        <option value="Entregado">Entregado</option>
-    </select><br>
-    <input type="submit" value="Actualizar Pedido">
-</form>
+    ?>
+    
+    

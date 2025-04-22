@@ -2,14 +2,19 @@
 $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 $id_pedido = (int)$_POST['id_pedido']; // Se obtiene el ID del pedido a editar
 
-$query = "SELECT * FROM PEDIDOS WHERE ID_PEDIDO = :id_pedido";
+$query = "BEGIN pkg_pedidos.obtener_pedido_por_id(:id_pedido, :cursor); END;";
 $stmt = oci_parse($conn, $query);
+$cursor = oci_new_cursor($conn);
 oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
+oci_bind_by_name($stmt, ':cursor', $cursor, -1, OCI_B_CURSOR);
 oci_execute($stmt);
-$row = oci_fetch_assoc($stmt);
+oci_execute($cursor);
+$row = oci_fetch_assoc($cursor);
 oci_free_statement($stmt);
+oci_free_statement($cursor);
 oci_close($conn);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -25,26 +30,31 @@ oci_close($conn);
         <h2>Editar Pedido</h2>
         <form action="update_pedido.php" method="post">
             <input type="hidden" name="id_pedido" value="<?= $id_pedido ?>">
+            
+            <label>ID Cliente:</label>
+            <input type="number" name="id_cliente" value="<?= $row['ID_CLIENTE'] ?>" required><br><br>
 
-            <label>Cliente ID:</label>
-            <input type="text" name="id_cliente" value="<?= $row['ID_CLIENTE'] ?>" required><br><br>
+            <label>Fecha de Pedido:</label>
+            <input type="date" name="fecha_pedido" value="<?= date('Y-m-d', strtotime($row['FECHA_PEDIDO'])) ?>" required><br><br>
 
-            <label>Fecha del Pedido:</label>
-            <input type="date" name="fecha_pedido" value="<?= date('Y-m-d', strtotime($row['FECHA_PEDIDO'])) ?>" required><br><br>
+            <label>Estado del Pedido:</label>
+            <input type="text" name="estado_pedido" value="<?= $row['ESTADO_PEDIDO'] ?>" required><br><br>
 
-            <label>Total:</label>
-            <input type="text" name="total" value="<?= $row['TOTAL'] ?>" required><br><br>
 
-            <label>Estado:</label>
-            <select name="estado" id="estado" required>
-                <option value="Pendiente" <?= $row['ESTADO'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
-                <option value="Enviado" <?= $row['ESTADO'] == 'Enviado' ? 'selected' : '' ?>>Enviado</option>
-                <option value="Entregado" <?= $row['ESTADO'] == 'Entregado' ? 'selected' : '' ?>>Entregado</option>
-            </select><br><br>
+            <label>Fecha de Entrega:</label>
+            <input type="date" name="fecha_entrega" value="<?= date('Y-m-d', strtotime($row['FECHA_ENTREGA'])) ?>" required><br><br>
 
-            <button type="submit">Guardar Cambios</button>
-        </form>
-    </div>
+            <label>Tipo de Envío:</label>
+            <input type="text" name="tipo_envio" value="<?= $row['TIPO_ENVIO'] ?>" required><br><br>
+
+            <label>Monto Total:</label>
+            <input type="number" name="monto_total" value="<?= $row['MONTO_TOTAL'] ?>" required><br><br>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+
+
+    </div>
 </body>
 
 </html>
