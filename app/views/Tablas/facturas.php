@@ -50,7 +50,7 @@ include("head.php")
                     oci_execute($cursor);
 
                     $row_count = 0;
-                    while ($row = oci_fetch_array($statement, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                    while ($row = oci_fetch_array($cursor, OCI_ASSOC + OCI_RETURN_NULLS)) {
                         $row_count++;
                         echo "<tr>
                         
