@@ -1,9 +1,9 @@
 <?php
-$conn = include_once __DIR__ . '/../../libraries/Database.php';
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 $id_producto = (int)$_POST['id_producto'];
 
 
-$query = "BEGIN pkg_productos.actualizar_producto(:id_producto, :nombre, :descripcion, :precio, :disponibilidad, :id_categoria); END;";
+$query = "BEGIN pkg_productos.obtener_producto_por_id(:id_producto, :cursor); END;";
 $stmt = oci_parse($conn, $query);
 $cursor = oci_new_cursor($conn);
 oci_bind_by_name($stmt, ':id_producto', $id_producto);
@@ -28,7 +28,7 @@ oci_close($conn);
 <body>
     <div class="Edit">
         <h2>Editar Producto</h2>
-        <form action="updateProducto.php" method="post">
+        <form action="update.php" method="post">
             <input type="hidden" name="id_producto" value="<?= $id_producto ?>">
 
             <label for="nombre">Nombre del Producto:</label>

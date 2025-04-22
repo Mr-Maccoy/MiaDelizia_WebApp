@@ -10,7 +10,7 @@
 <body>
     <div class="Insert">
         <h2>Agregar Pedido</h2>
-        <form action="insert_pedido.php" method="post">
+        <form action="insert.php" method="post">
 
             <label for="id_cliente">ID Cliente:</label>
             <input type="text" name="id_cliente" id="id_cliente" required><br><br>

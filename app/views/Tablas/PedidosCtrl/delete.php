@@ -1,6 +1,6 @@
 <?php
 // Conexión a la base de datos
-$conn = include_once __DIR__ . '/../../libraries/Database.php';
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
     
 
