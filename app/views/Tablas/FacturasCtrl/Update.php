@@ -1,68 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Factura</title>
-</head>
-<body>
-    <h1>Editar Factura</h1>
+<?php
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
-    <?php
-    $conn = include_once __DIR__ . '/../../libraries/Database.php';
+// Variables recibidas del formulario
+$id_pedido = (int)$_POST['id_pedido']; // ID del cliente que se va a actualizar
+$fecha_factura = $_POST['fecha_factura'];
+$total = $_POST['total'];
+$estado_factura = $_POST['estado_factura'];
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $query = "SELECT ID_PEDIDO, FECHA_FACTURA, TOTAL, ESTADO_FACTURA FROM FACTURA WHERE ID_FACTURA = :id";
-        $statement = oci_parse($conn, $query);
-        oci_bind_by_name($statement, ':id', $id);
 
-        if (!oci_execute($statement)) {
-            $e = oci_error($statement);
-            die("Error al obtener la factura: " . $e['message']);
-        }
+// Sentencia SQL para actualizar
+$sql = "BEGIN pkg_facturas.actualizar_factura(:id_pedido, TO_DATE(:fecha_factura, 'YYYY-MM-DD'), :total, :estado_factura)); END;";
 
-        $factura = oci_fetch_assoc($statement);
-        oci_free_statement($statement);
-    }
+$stmt = oci_parse($conn, $sql);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['id'];
-        $pedido = $_POST['pedido'];
-        $fecha_factura = $_POST['fecha_factura'];
-        $total = $_POST['total'];
-        $estado_factura = $_POST['estado_factura'];
+// Asociar variables a los parámetros de la consulta
+oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
+oci_bind_by_name($stmt, ':fecha_factura', $fecha_factura);
+oci_bind_by_name($stmt, ':total', $total);
+oci_bind_by_name($stmt, ':estado_factura', $estado_factura);
 
-        $query = "UPDATE FACTURA SET ID_PEDIDO = :pedido, FECHA_FACTURA = :fecha_factura, TOTAL = :total, ESTADO_FACTURA = :estado_factura WHERE ID_FACTURA = :id";
-        $statement = oci_parse($conn, $query);
-        oci_bind_by_name($statement, ':id', $id);
-        oci_bind_by_name($statement, ':pedido', $pedido);
-        oci_bind_by_name($statement, ':fecha_factura', $fecha_factura);
-        oci_bind_by_name($statement, ':total', $total);
-        oci_bind_by_name($statement, ':estado_factura', $estado_factura);
 
-        if (!oci_execute($statement)) {
-            $e = oci_error($statement);
-            die("Error al actualizar la factura: " . $e['message']);
-        }
+// Ejecutar la consulta
+if (oci_execute($stmt)) {
+    oci_commit($conn);
+    echo "Registro actualizado correctamente.";
+    header("Location: /../Tablas/facturas.php?success=1");
+} else {
+    $e = oci_error($stmt);
+    echo "Error al actualizar: " . $e['message'];
+}
 
-        echo "Factura actualizada exitosamente.";
-        oci_free_statement($statement);
-        oci_close($conn);
-    }
-    ?>
+// Cerrar la conexión
+oci_free_statement($stmt);
+oci_close($conn);
+?>
 
-    <form action="EditarFactura.php" method="post">
-        <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>">
-        <label for="pedido">Pedido:</label>
-        <input type="text" id="pedido" name="pedido" value="<?php echo htmlspecialchars($factura['ID_PEDIDO']); ?>" required><br>
-        <label for="fecha_factura">Fecha Factura:</label>
-        <input type="date" id="fecha_factura" name="fecha_factura" value="<?php echo htmlspecialchars($factura['FECHA_FACTURA']); ?>" required><br>
-        <label for="total">Total:</label>
-        <input type="number" id="total" name="total" value="<?php echo htmlspecialchars($factura['TOTAL']); ?>" required><br>
-        <label for="estado_factura">Estado Factura:</label>
-        <input type="text" id="estado_factura" name="estado_factura" value="<?php echo htmlspecialchars($factura['ESTADO_FACTURA']); ?>" required><br>
-        <button type="submit">Actualizar</button>
-    </form>
-</body>
-</html>
