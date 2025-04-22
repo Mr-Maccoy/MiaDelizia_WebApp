@@ -19,6 +19,7 @@ include("head.php");
                     <th>Fecha</th>
                     <th>Ubicación</th>
                     <th>Descripción</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@ include("head.php");
                             <td>{$row['FECHA_EVENTO']}</td>
                             <td>{$row['UBICACION']}</td>
                             <td>{$row['DESCRIPCION']}</td>
+                            
                           </tr>";
                 }
 
