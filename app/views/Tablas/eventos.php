@@ -54,7 +54,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form method=\"post\" action=\"/Tablas/EventosCtrl/EliminarEvento.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar este evento?');\">
+                                <form method=\"post\" action=\"/Tablas/EventosCtrl/delete.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar este evento?');\">
                                     <input type=\"hidden\" name=\"id_evento\" value=\"{$row['ID_EVENTO']}\">
                                     <button type=\"submit\" class=\"btn-eliminar\">Eliminar</button>
                                 </form>

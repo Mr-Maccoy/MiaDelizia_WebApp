@@ -33,7 +33,7 @@ oci_close($conn);
 <body>
     <div class="Edit">
         <h2>Editar Inventario</h2>
-        <form action="update_inventario.php" method="post">
+        <form action="update.php" method="post">
             <input type="hidden" name="id_inventario" value="<?= $id_inventario ?>">
 
             <label>ID Producto:</label>

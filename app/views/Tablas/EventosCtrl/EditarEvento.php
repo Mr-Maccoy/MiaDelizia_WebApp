@@ -32,7 +32,7 @@ oci_close($conn);
 <body>
     <div class="Edit">
         <h2>Editar Evento</h2>
-        <form action="update_evento.php" method="post">
+        <form action="update.php" method="post">
             <input type="hidden" name="id_evento" value="<?= $id_evento ?>">
 
             <label>Nombre del Evento:</label>

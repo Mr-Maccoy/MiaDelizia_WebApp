@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     oci_bind_by_name($stmt, ':id_evento', $id_evento, -1, SQLT_INT);
 
     if (oci_execute($stmt)) {
-        echo "✅ Evento eliminado correctamente.";
+        echo "Evento eliminado correctamente.";
+        header("Location: /../Tablas/eventos.php?success=1");
     } else {
         $e = oci_error($stmt);
         echo "❌ Error al eliminar el evento: " . $e['message'];
@@ -22,8 +23,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<form action="delete_evento.php" method="POST">
-    <label for="id_evento">ID Evento:</label>
-    <input type="text" name="id_evento" required><br><br>
-    <input type="submit" value="Eliminar Evento">
-</form>
