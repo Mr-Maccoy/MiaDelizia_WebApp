@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (oci_execute($stmt)) {
         echo "Inventario agregado correctamente.";
+        header("Location: /../Tablas/inventario.php?success=1");
     } else {
         $e = oci_error($stmt);
         echo "Error al agregar el inventario: " . $e['message'];
@@ -24,13 +25,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     oci_close($conn);
 }
 ?>
-
-<form action="insert_inventario.php" method="POST">
-    <label for="id_producto">ID Producto:</label>
-    <input type="number" name="id_producto" required><br>
-
-    <label for="cantidad">Cantidad Disponible:</label>
-    <input type="number" name="cantidad" required><br>
-
-    <input type="submit" value="Agregar Inventario">
-</form>

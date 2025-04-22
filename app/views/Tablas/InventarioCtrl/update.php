@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (oci_execute($stmt)) {
         echo "Inventario actualizado correctamente.";
+        header("Location: /../Tablas/inventario.php?success=1");
     } else {
         $e = oci_error($stmt);
         echo "Error al actualizar el inventario: " . $e['message'];
@@ -28,15 +29,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<form action="update_inventario.php" method="POST">
-    <label for="id_inventario">ID Inventario:</label>
-    <input type="number" name="id_inventario" required><br>
-
-    <label for="id_producto">ID Producto:</label>
-    <input type="number" name="id_producto" required><br>
-
-    <label for="cantidad">Cantidad Disponible:</label>
-    <input type="number" name="cantidad" required><br>
-
-    <input type="submit" value="Actualizar Inventario">
-</form>
