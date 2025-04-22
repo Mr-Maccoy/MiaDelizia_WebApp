@@ -26,6 +26,8 @@ include("head.php")
                         <th>Total</th>
                         <th>Estado factura</th>
                         <th>Factura del pedido</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,15 +37,17 @@ include("head.php")
 
 
 
-                    $query = "SELECT ID_FACTURA, ID_PEDIDO, FECHA_FACTURA, TOTAL, ESTADO_FACTURA FROM FACTURA";
+                    $query = "BEGIN pkg_facturas.obtener_facturas(:cursor); END;";
                     $statement = oci_parse($conn, $query);
-
+                    $cursor = oci_new_cursor($conn);
+                    oci_bind_by_name($statement, ':cursor', $cursor, -1, OCI_B_CURSOR);
 
                     if (!oci_execute($statement)) {
                         $e = oci_error($statement);
                         die("Error al ejecutar la consulta: " . $e['message']);
                     }
 
+                    oci_execute($cursor);
 
                     $row_count = 0;
                     while ($row = oci_fetch_array($statement, OCI_ASSOC + OCI_RETURN_NULLS)) {
@@ -55,12 +59,15 @@ include("head.php")
                         <td>{$row['TOTAL']}</td>
                         <td>{$row['ESTADO_FACTURA']}</td>
                         <td>
-                            <button class=\"btn-editar\"><i class=\"fas fa-edit\"></i>  Editar</button>
+                            <form method=\"post\" action=\"/Tablas/ClientesCtrl/EditarCliente.php\" onsubmit=\"return confirm('¿Estás seguro de editar este usuario?');\">
+                                    <input type=\"hidden\" name=\"id_cliente\" value=\"{$row['ID_CLIENTE']}\">
+                                    <button type=\"submit\" class=\"btn-editar\">Editar</button>
+                                </form>
                         </td>
                         <td>
                             
-                            <form method=\"post\" action=\"/Tablas/FacturasCtrl/delete.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar esta factura?');\">
-                                    <input type=\"hidden\" name=\"id_factura\" value=\"{$row['ID_FACTURA']}\">
+                            <form method=\"post\" action=\"/Tablas/ClientesCtrl/delete.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar este usuario?');\">
+                                    <input type=\"hidden\" name=\"id_cliente\" value=\"{$row['ID_CLIENTE']}\">
                                     <button type=\"submit\" class=\"btn-eliminar\">Eliminar</button>
                                 </form>
                         </td>
