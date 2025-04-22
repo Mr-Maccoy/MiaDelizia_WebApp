@@ -3,12 +3,12 @@ $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
 //Aca guardamos lo que metimos en el form en variables de php
 
-$pedido = $_POST['pedido'];
+$pedido = $_POST['id_pedido'];
 $fecha_factura = $_POST['fecha_factura'];
 $total = $_POST['total'];
 $estado_factura = $_POST['estado_factura'];
 
-$sql= "BEGIN pkg_clientes.insertar_cliente(:nombre, :fecha_factura, :total, :estado_factura); END;";
+$sql= "BEGIN pkg_factura.insertar_factura(:id_pedido, :fecha_factura, :total, :estado_factura); END;";
        
 $stmt = oci_parse($conn, $sql);
 
