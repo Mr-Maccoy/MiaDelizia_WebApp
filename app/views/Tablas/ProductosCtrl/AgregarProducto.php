@@ -10,7 +10,7 @@
 <body>
     <div class="Insert">
         <h2>Agregar Producto</h2>
-        <form action="insertProducto.php" method="post">
+        <form action="insert.php" method="post">
 
             <label for="nombre">Nombre del Producto:</label>
             <input type="text" name="nombre" id="nombre" required><br><br>

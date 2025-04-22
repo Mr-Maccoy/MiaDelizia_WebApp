@@ -1,6 +1,6 @@
 <?php
 // Conexión a la base de datos
-$conn = include_once __DIR__ . '/../../libraries/Database.php';
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
 $id_producto = (int)$_POST['id_producto']; 
 $nombre = $_POST['nombre'];

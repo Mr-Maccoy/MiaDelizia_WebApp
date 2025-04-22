@@ -19,6 +19,7 @@
                     <th>Descripción</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
                             <td>{$row['FECHA_EVENTO']}</td>
                             <td>{$row['UBICACION']}</td>
                             <td>{$row['DESCRIPCION']}</td>
+
                             <td>
                                 <form method=\"post\" action=\"/Tablas/EventosCtrl/EditarEvento.php\" onsubmit=\"return confirm('¿Estás seguro de editar este evento?');\">
                                     <input type=\"hidden\" name=\"id_evento\" value=\"{$row['ID_EVENTO']}\">
