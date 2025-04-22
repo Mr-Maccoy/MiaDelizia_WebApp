@@ -17,6 +17,8 @@
                     <th>Nombre del Producto</th>
                     <th>Cantidad Disponible</th>
                     <th>Fecha de Actualización</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,11 +58,23 @@
                         <td>{$nombreProducto}</td>
                         <td>{$row['CANTIDAD_DISPONIBLE']}</td>
                         <td>{$row['FECHA_ACTUALIZACION']}</td>
+                        <td>
+                            <form method=\"post\" action=\"/Tablas/InventarioCtrl/EditarInventario.php\" onsubmit=\"return confirm('¿Estás seguro de editar este inventario?');\">
+                                <input type=\"hidden\" name=\"id_inventario\" value=\"{$row['ID_INVENTARIO']}\">
+                                <button type=\"submit\" class=\"btn-editar\">Editar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method=\"post\" action=\"/Tablas/InventarioCtrl/EliminarInventario.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar este inventario?');\">
+                                <input type=\"hidden\" name=\"id_inventario\" value=\"{$row['ID_INVENTARIO']}\">
+                                <button type=\"submit\" class=\"btn-eliminar\">Eliminar</button>
+                            </form>
+                        </td>
                       </tr>";
             }
 
             if ($row_count === 0) {
-                echo "<tr><td colspan='4'>No hay inventario registrado</td></tr>";
+                echo "<tr><td colspan='6'>No hay inventario registrado</td></tr>";
             }
 
             oci_free_statement($stmt);
@@ -71,6 +85,11 @@
 
             </tbody>
         </table>
+
+        <br>
+        <a href="/Tablas/InventarioCtrl/AgregarInventario.php">
+            <button>Agregar Inventario</button>
+        </a>
     </div>
 </div>
 

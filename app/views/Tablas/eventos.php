@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-include("head.php");
-?>
- 
+<?php include("head.php"); ?>
+
 <body>
 <header>
     <?php include("menu.php"); ?>
@@ -19,6 +17,8 @@ include("head.php");
                     <th>Fecha</th>
                     <th>Ubicación</th>
                     <th>Descripción</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,11 +45,23 @@ include("head.php");
                             <td>{$row['FECHA_EVENTO']}</td>
                             <td>{$row['UBICACION']}</td>
                             <td>{$row['DESCRIPCION']}</td>
-                          </tr>";
+                            <td>
+                                <form method=\"post\" action=\"/Tablas/EventosCtrl/EditarEvento.php\" onsubmit=\"return confirm('¿Estás seguro de editar este evento?');\">
+                                    <input type=\"hidden\" name=\"id_evento\" value=\"{$row['ID_EVENTO']}\">
+                                    <button type=\"submit\" class=\"btn-editar\">Editar</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method=\"post\" action=\"/Tablas/EventosCtrl/EliminarEvento.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar este evento?');\">
+                                    <input type=\"hidden\" name=\"id_evento\" value=\"{$row['ID_EVENTO']}\">
+                                    <button type=\"submit\" class=\"btn-eliminar\">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>";
                 }
 
                 if ($row_count === 0) {
-                    echo "<tr><td colspan='4'>No hay eventos registrados</td></tr>";
+                    echo "<tr><td colspan='6'>No hay eventos registrados</td></tr>";
                 }
 
                 oci_free_statement($statement);
