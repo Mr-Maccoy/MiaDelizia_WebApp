@@ -15,12 +15,7 @@ include("head.php")
 
 
     <div class="jumbotron jumbotron-flud text-center">
-    <div class="container">
-    <h1 class="display-3">Comming Soon</h1>
-    <p class="lead">Estamos en proceso de contrucción</p>
-    </div>
-
-    <div id="Clientes">
+    <div id="Pagos">
         <table border="1">
             <thead>
                 <tr>
@@ -31,6 +26,8 @@ include("head.php")
                     <th>Metodo pago</th>
                     <th>Estado pago</th>
                     <th>Pedido pago</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,8 +35,10 @@ include("head.php")
                 <?php
                 $conn = $conn = include_once __DIR__ . '/../../libraries/Database.php';
 
-                $query = "SELECT ID_PAGO, ID_PEDIDO, FECHA_PAGO, MONTO, DIRECCION, METODO_PAGO, ESTADO_PAGO, PAGO_PEDIDO FROM PAGOS";
+                $query = "BEGIN pkg_pagos.obtener_pagos(:cursor); END;";
                 $statement = oci_parse($conn, $query);
+                $cursor = oci_new_cursor($conn);
+                oci_bind_by_name($statement, ':cursor', $cursor, -1, OCI_B_CURSOR);
 
                 if (!oci_execute($statement)) {
                     $e = oci_error($statement);
@@ -80,6 +79,7 @@ include("head.php")
                 }
 
                 oci_free_statement($statement);
+                oci_free_statement($cursor);
                 oci_close($conn);
                 ?>
 

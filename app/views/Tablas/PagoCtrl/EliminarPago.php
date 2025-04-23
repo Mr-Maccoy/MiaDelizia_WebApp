@@ -1,19 +1,28 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_pago'])) {
-    $conn = include_once __DIR__ . '/../../libraries/Database.php';
-    $id_pago = $_POST['id_pago'];
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
-    $query = "DELETE FROM PAGOS WHERE ID_PAGO = :id_pago";
-    $statement = oci_parse($conn, $query);
-    oci_bind_by_name($statement, ':id_pago', $id_pago);
 
-    if (!oci_execute($statement)) {
-        $e = oci_error($statement);
-        die("Error al eliminar el pago: " . $e['message']);
-    }
+$id_pago = (int)$_POST['id_pago'];
+echo "ID a eliminar: " . $id_pago . "<br>";
 
-    echo "Pago eliminado exitosamente.";
-    oci_free_statement($statement);
-    oci_close($conn);
+$sql = "BEGIN pkg_pagos.eliminar_pago(:id_pago); END;";
+
+$stmt = oci_parse($conn, $sql);
+
+
+oci_bind_by_name($stmt, ':id_pago', $id_pago);
+
+
+if (oci_execute($stmt)) {
+    oci_commit($conn);
+    echo "Registro eliminado correctamente.";
+    header("Location: /../Tablas/pagos.php?success=1");
+} else {
+    $e = oci_error($stmt);
+    echo "Error al eliminar: " . $e['message'];
 }
+
+
+oci_free_statement($stmt);
+oci_close($conn);
 ?>
