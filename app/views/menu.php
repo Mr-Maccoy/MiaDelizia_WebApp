@@ -28,10 +28,13 @@
             <a class="dropdown-item" href="Tablas/inventario.php">Tabla Inventario</a>
             <a class="dropdown-item" href="Tablas/productos.php">Tabla Productos</a>
             <a class="dropdown-item" href="Tablas/categorias.php">Tabla Categorias</a>
+            <a class="dropdown-item" href="Tablas/detallePedido.php">Tabla Detalles Pedido</a>
+            <a class="dropdown-item" href="Tablas/histEstadoPedido.php">Tabla Historial Pedido</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="Tablas/facturas.php">Tabla Facturas</a>
             <a class="dropdown-item" href="Tablas/roles.php">Tabla Roles</a>
             <a class="dropdown-item" href="Tablas/usuarios.php">Tabla Usuarios</a>
+            <a class="dropdown-item" href="Tablas/auditoria.php">Tabla Auditoria</a>
         </div>
           </li>
 

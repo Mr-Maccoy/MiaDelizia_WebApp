@@ -25,10 +25,13 @@
             <a class="dropdown-item" href="productos.php">Tabla Productos</a>
             <a class="dropdown-item" href="categorias.php">Tabla Categorias</a>
             <a class="dropdown-item" href="pagos.php">Tabla Pagos</a>
+            <a class="dropdown-item" href="detallePedido.php">Tabla Detalles Pedido</a>
+            <a class="dropdown-item" href="histEstadoPedido.php">Tabla Historial Pedido</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="facturas.php">Tabla Facturas</a>
             <a class="dropdown-item" href="roles.php">Tabla Roles</a>
             <a class="dropdown-item" href="usuarios.php">Tabla Usuarios</a>
+            <a class="dropdown-item" href="auditoria.php">Tabla Auditoria</a>
         </div>
           </li>
 
