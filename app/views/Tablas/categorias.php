@@ -12,6 +12,7 @@ include("head.php")
 <header>
         <?php include("menu.php") ?>
     </header>
+
     <div class="jumbotron jumbotron-flud text-center">
     <div id="Categorias">
         <table border="1">
@@ -20,6 +21,8 @@ include("head.php")
 
                     <th>Nombre</th>
                     <th>Descripcion</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>

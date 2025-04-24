@@ -44,6 +44,7 @@ include("head.php")
                     $e = oci_error($statement);
                     die("Error al ejecutar la consulta: " . $e['message']);
                 }
+                oci_execute($cursor);
 
 
                 $row_count = 0;
