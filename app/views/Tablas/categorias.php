@@ -30,13 +30,17 @@ include("head.php")
                 <?php
                 $conn = include_once __DIR__ . '/../../libraries/Database.php';
 
-                $query = "SELECT ID_CATEGORIA,NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA  FROM CATEGORIAS";
+                $query = "BEGIN pkg_categorias.obtener_categorias(:cursor); END;";
                 $statement = oci_parse($conn, $query);
+                $cursor = oci_new_cursor($conn);
+                oci_bind_by_name($statement, ':cursor', $cursor, -1, OCI_B_CURSOR);
+
 
                 if (!oci_execute($statement)) {
                     $e = oci_error($statement);
                     die("Error al ejecutar la consulta: " . $e['message']);
                 }
+                oci_execute($cursor);
 
 
                 $row_count = 0;
@@ -44,8 +48,8 @@ include("head.php")
                     $row_count++;
                     echo "<tr>
                         
-                        <td>{$row['NOMBRE_CATEGORIA']}</td>
-                        <td>{$row['DESCRIPCION_CATEGORIA']}</td>
+                        <td>{$row['nombre_categoria']}</td>
+                        <td>{$row['descripcion_categoria']}</td>
                         <td>
                             <button class=\"btn-editar\"><i class=\"fas fa-edit\"></i>  Editar</button>
                         </td>
@@ -66,6 +70,7 @@ include("head.php")
                 }
 
                 oci_free_statement($statement);
+                oci_free_statement($cursor);
                 oci_close($conn);
                 ?>
 

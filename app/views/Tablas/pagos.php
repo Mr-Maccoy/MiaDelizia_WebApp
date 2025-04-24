@@ -40,6 +40,7 @@ include("head.php")
                 $cursor = oci_new_cursor($conn);
                 oci_bind_by_name($statement, ':cursor', $cursor, -1, OCI_B_CURSOR);
 
+
                 if (!oci_execute($statement)) {
                     $e = oci_error($statement);
                     die("Error al ejecutar la consulta: " . $e['message']);

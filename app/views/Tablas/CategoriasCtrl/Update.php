@@ -1,62 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Categoría</title>
-</head>
-<body>
-    <h1>Editar Categoría</h1>
+<?php
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
-    <?php
-    $conn = include_once __DIR__ . '/../../libraries/Database.php';
+// Variables recibidas del formulario
+$id_categoria = (int)$_POST['id_categoria']; // ID del cliente que se va a actualizar
+$nombre_categoria = $_POST['nombre_categoria'];
+$descripcion_categoria = $_POST['descripcion_categoria'];
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-        $id = $_GET['id'];
-       $query= "UPDATE CATEGORIAS 
-                SET NOMBRE_CATEGORIA = :nombre, DESCRIPCION_CATEGORIA = :descripcion 
-                WHERE ID_CATEGORIA = :id";
-        $statement = oci_parse($conn, $query);
-        oci_bind_by_name($statement, ':id', $id);
 
-        if (!oci_execute($statement)) {
-            $e = oci_error($statement);
-            die("Error al obtener la categoría: " . $e['message']);
-        }
 
-        $categoria = oci_fetch_assoc($statement);
-        oci_free_statement($statement);
-    }
+// Sentencia SQL para actualizar
+$sql = "BEGIN pkg_facturas.actualizar_categoria(:id_categoria, :nombre_categoria, :descripcion_categoria); END;";
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $descripcion = $_POST['descripcion'];
+$stmt = oci_parse($conn, $sql);
 
-        $query = "UPDATE CATEGORIAS SET NOMBRE_CATEGORIA = :nombre, DESCRIPCION_CATEGORIA = :descripcion WHERE ID_CATEGORIA = :id";
-        $statement = oci_parse($conn, $query);
-        oci_bind_by_name($statement, ':id', $id);
-        oci_bind_by_name($statement, ':nombre', $nombre);
-        oci_bind_by_name($statement, ':descripcion', $descripcion);
+// Asociar variables a los parámetros de la consulta
+oci_bind_by_name($stmt, ':id_categoria', $id_categoria);
+oci_bind_by_name($stmt, ':nombre_categoria', $nombre_categoria);
+oci_bind_by_name($stmt, ':descripcion_categoria', $descripcion_categoria);
 
-        if (!oci_execute($statement)) {
-            $e = oci_error($statement);
-            die("Error al actualizar la categoría: " . $e['message']);
-        }
 
-        echo "Categoría actualizada exitosamente.";
-        oci_free_statement($statement);
-        oci_close($conn);
-    }
-    ?>
+// Ejecutar la consulta
+if (oci_execute($stmt)) {
+    oci_commit($conn);
+    echo "Registro actualizado correctamente.";
+    header("Location: /../Tablas/categorias.php?success=1");
+} else {
+    $e = oci_error($stmt);
+    echo "Error al actualizar: " . $e['message'];
+}
 
-    <form action="EditarCategoria.php" method="post">
-        <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($categoria['NOMBRE_CATEGORIA']); ?>" required><br>
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($categoria['DESCRIPCION_CATEGORIA']); ?>" required><br>
-        <button type="submit">Actualizar</button>
-    </form>
-</body>
-</html>
+// Cerrar la conexión
+oci_free_statement($stmt);
+oci_close($conn);
+?>

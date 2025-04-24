@@ -26,7 +26,7 @@ oci_close($conn);
 
 <body>
     <div class="Edit">
-        <h2>Agregar Factura</h2>
+        <h2>Editar Factura</h2>
         <form action="update.php" method="post">
             <input type="hidden" name="id_pedido" value="<?= $id_pedido ?>">
 

@@ -1,3 +1,20 @@
+<?php
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
+$id_pedido = (int)$_POST['id_categoria'];
+
+$query = "BEGIN pkg_categorias.obtener_categoria_por_id(:id_categoria, :cursor); END;";
+$stmt = oci_parse($conn, $query);
+$cursor = oci_new_cursor($conn);
+oci_bind_by_name($stmt, ':id_categoria', $id_categoria);
+oci_bind_by_name($stmt, ':cursor', $cursor, -1, OCI_B_CURSOR);
+oci_execute($stmt);
+oci_execute($cursor);
+$row = oci_fetch_assoc($cursor);
+oci_free_statement($stmt);
+oci_free_statement($cursor);
+oci_close($conn);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,58 +22,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Categoría</title>
 </head>
+
 <body>
+<div class="Edit">
+
     <h1>Editar Categoría</h1>
+        <form action="update.php" method="post">
+            <input type="hidden" name="id_categoria" value="<?= $id_categoria ?>">
 
-    <?php
-    $conn = include_once __DIR__ . '/../../libraries/Database.php';
+            <label for="nombre_categoria">Nombre:</label>
+            <input type="text" name="nombre_categoria" id="nombre_categoria" required><br><br>
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $query = "SELECT NOMBRE_CATEGORIA, DESCRIPCION_CATEGORIA FROM CATEGORIAS WHERE ID_CATEGORIA = :id";
-        $statement = oci_parse($conn, $query);
-        oci_bind_by_name($statement, ':id', $id);
+        <label for="descripcion_categoria">Descripción:</label>
+        <input type="text" id="descripcion_categoria" name="descripcion_categoria" required><br><br>
 
-        if (!oci_execute($statement)) {
-            $e = oci_error($statement);
-            die("Error al obtener la categoría: " . $e['message']);
-        }
-
-        $categoria = oci_fetch_assoc($statement);
-        oci_free_statement($statement);
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $descripcion = $_POST['descripcion'];
-
-        $query = "UPDATE CATEGORIAS SET NOMBRE_CATEGORIA = :nombre, DESCRIPCION_CATEGORIA = :descripcion WHERE ID_CATEGORIA = :id";
-        $statement = oci_parse($conn, $query);
-        oci_bind_by_name($statement, ':id', $id);
-        oci_bind_by_name($statement, ':nombre', $nombre);
-        oci_bind_by_name($statement, ':descripcion', $descripcion);
-
-        if (!oci_execute($statement)) {
-            $e = oci_error($statement);
-            die("Error al actualizar la categoría: " . $e['message']);
-        }
-
-        echo "Categoría actualizada exitosamente.";
-        oci_free_statement($statement);
-        oci_close($conn);
-    }
-    ?>
-
-    <form action="EditarCategoria.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="<?php echo $categoria['NOMBRE_CATEGORIA']; ?>" required>
-        <br>
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" name="descripcion" value="<?php echo $categoria['DESCRIPCION_CATEGORIA']; ?>" required>
-        <br>
         <button type="submit">Actualizar</button>
     </form>
+    </div>
+
 </body>
 </html>

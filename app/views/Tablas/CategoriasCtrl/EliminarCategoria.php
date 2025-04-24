@@ -1,19 +1,29 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_categoria'])) {
-    $conn = include_once __DIR__ . '/../../libraries/Database.php';
-    $id_categoria = $_POST['id_categoria'];
+$conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
-    $query = "DELETE FROM CATEGORIAS WHERE ID_CATEGORIA = :id_categoria";
-    $statement = oci_parse($conn, $query);
-    oci_bind_by_name($statement, ':id_categoria', $id_categoria);
 
-    if (!oci_execute($statement)) {
-        $e = oci_error($statement);
-        die("Error al eliminar la categoría: " . $e['message']);
-    }
+$id_cliente = (int)$_POST['id_factura'];
+echo "ID a eliminar: " . $id_factura . "<br>";
 
-    echo "Categoría eliminada exitosamente.";
-    oci_free_statement($statement);
-    oci_close($conn);
+$sql = "BEGIN pkg_categorias.eliminar_categoria(:id_categoria); END;";
+
+$stmt = oci_parse($conn, $sql);
+
+
+oci_bind_by_name($stmt, ':id_categoria', $id_categoria);
+
+
+if (oci_execute($stmt)) {
+    oci_commit($conn);
+    echo "Registro eliminado correctamente.";
+    header("Location: /../Tablas/categorias.php?success=1");
+} else {
+    $e = oci_error($stmt);
+    echo "Error al eliminar: " . $e['message'];
 }
+
+
+oci_free_statement($stmt);
+oci_close($conn);
 ?>
+
