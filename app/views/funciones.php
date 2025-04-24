@@ -54,6 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['funcion'])) {
             break;
 
         case 'fn_verificar_disponibilidad':
+            $query .= ":id_producto, :cantidad_solicitada) AS resultado FROM dual";
+            $params = ['id_producto', 'cantidad_solicitada'];
+            break;
+
         case 'fn_categoria_producto':
         case 'fn_nombre_producto':
             $query .= ":id_producto) AS resultado FROM dual";
@@ -112,7 +116,7 @@ include("inc/head.php")
         'fn_calcular_edad' => ['fecha' => 'date'],
         'fn_total_compras_cliente' => ['id_cliente' => 'select_cliente'],
         'fn_obtener_descuento' => ['id_cliente' => 'select_cliente'],
-        'fn_verificar_disponibilidad' => ['id_producto' => 'select_producto'],
+        'fn_verificar_disponibilidad' => ['id_producto' => 'select_producto', 'cantidad_solicitada' => 'number'],
         'fn_calcular_iva' => ['monto' => 'number'],
         'fn_nombre_completo_cliente' => ['id_cliente' => 'select_cliente'],
         'fn_categoria_producto' => ['id_producto' => 'select_producto'],
