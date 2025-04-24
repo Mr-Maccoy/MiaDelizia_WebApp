@@ -28,6 +28,7 @@
             <a class="dropdown-item" href="Tablas/inventario.php">Tabla Inventario</a>
             <a class="dropdown-item" href="Tablas/productos.php">Tabla Productos</a>
             <a class="dropdown-item" href="Tablas/categorias.php">Tabla Categorias</a>
+            <a class="dropdown-item" href="Tablas/pagos.php">Tabla Pagos</a>
             <a class="dropdown-item" href="Tablas/detallePedido.php">Tabla Detalles Pedido</a>
             <a class="dropdown-item" href="Tablas/histEstadoPedido.php">Tabla Historial Pedido</a>
             <div class="dropdown-divider"></div>
