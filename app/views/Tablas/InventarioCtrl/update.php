@@ -4,7 +4,7 @@ $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $id_inventario = $_POST['id_inventario'];
-    $cantidad_disponible = $_POST['cantidad'];
+    $cantidad_disponible = $_POST['cantidad_disponible'];
 
     $sql = "BEGIN pkg_inventario.actualizar_inventario(:id_inventario, :id_producto, :cantidad_disponible, SYSDATE); END;";
     

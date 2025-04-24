@@ -28,14 +28,12 @@ oci_close($conn);
 <body>
     <div class="Edit">
         <h2>Editar Pedido</h2>
-        <form action="update_pedido.php" method="post">
+        <form action="update.php" method="post">
             <input type="hidden" name="id_pedido" value="<?= $id_pedido ?>">
             
             <label>ID Cliente:</label>
             <input type="number" name="id_cliente" value="<?= $row['ID_CLIENTE'] ?>" required><br><br>
 
-            <label>Fecha de Pedido:</label>
-            <input type="date" name="fecha_pedido" value="<?= date('Y-m-d', strtotime($row['FECHA_PEDIDO'])) ?>" required><br><br>
 
             <label>Estado del Pedido:</label>
             <input type="text" name="estado_pedido" value="<?= $row['ESTADO_PEDIDO'] ?>" required><br><br>

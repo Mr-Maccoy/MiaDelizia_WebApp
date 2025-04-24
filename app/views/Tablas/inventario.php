@@ -65,7 +65,7 @@
                             </form>
                         </td>
                         <td>
-                            <form method=\"post\" action=\"/Tablas/InventarioCtrl/EliminarInventario.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar este inventario?');\">
+                            <form method=\"post\" action=\"/Tablas/InventarioCtrl/delete.php\" onsubmit=\"return confirm('¿Estás seguro de eliminar este inventario?');\">
                                 <input type=\"hidden\" name=\"id_inventario\" value=\"{$row['ID_INVENTARIO']}\">
                                 <button type=\"submit\" class=\"btn-eliminar\">Eliminar</button>
                             </form>
