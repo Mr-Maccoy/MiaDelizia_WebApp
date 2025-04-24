@@ -1,6 +1,6 @@
 <?php
 $conn = include_once __DIR__ . '/../../../libraries/Database.php';
-$id_cliente = (int)$_POST['id_pedido'];
+$id_pago = (int)$_POST['id_pedido'];
 
 $query = "BEGIN pkg_pagos.obtener_pago_por_id(:id_pedido, :cursor); END;";
 $stmt = oci_parse($conn, $query);
@@ -28,6 +28,8 @@ oci_close($conn);
     <div class="Edit">
     <h2>Editar Pago</h2>
     <form action="update.php" method="post">
+    <input type="hidden" name="id_pedido" value="<?= $id_pedido ?>">
+
 
         <label for="id_pedido">Pedido:</label>
         <input type="text" id="id_pedido" name="id_pedido" required><br><br>

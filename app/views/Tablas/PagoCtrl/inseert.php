@@ -5,8 +5,8 @@ $conn = include_once __DIR__ . '/../../../libraries/Database.php';
 
 $id_pedido = $_POST['id_pedido'];
 $monto = $_POST['monto'];
-$metodo = $_POST['metodo'];
-$estado = $_POST['estado'];
+$metodo_pago = $_POST['metodo_pago'];
+$estado_pago = $_POST['estado_pago'];
 
 
 
@@ -16,12 +16,10 @@ $sql= "BEGIN pkg_pagos.insertar_pago(:id_pedido, :monto, :metodo, :estado); END;
        
 $stmt = oci_parse($conn, $sql);
 
-
-
 oci_bind_by_name($stmt, ':id_pedido', $id_pedido);
 oci_bind_by_name($stmt, ':monto', $monto);
-oci_bind_by_name($stmt, ':metodo', $metodo);
-oci_bind_by_name($stmt, ':estado', $estado);
+oci_bind_by_name($stmt, ':metodo_pago', $metodo_pago);
+oci_bind_by_name($stmt, ':estado_pago', $estado_pago);
 
 if (oci_execute($stmt)) {
     oci_commit($conn);
